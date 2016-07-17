@@ -1,0 +1,97 @@
+#:kivy 1.9.1
+
+<ScreenWelcome>:
+    Image:
+        source: 'ButterflyLogo2.png'
+
+<ScreenStart>:
+    textInput: textInput
+
+    FloatLayout:
+        size: root.size
+
+        canvas.before:
+            Color:
+                rgba: 1,1,1,1
+            Rectangle:
+                size: root.size
+                pos: root.pos
+
+        Label:
+            size_hint: 0.90,0
+            pos: (root.width * 0.05, root.height * 0.80)
+            text_size: self.size
+            font_size: '22sp'
+            halign: 'left'
+            valign: 'bottom'
+            color: 1, 0.5, 0.7, 1
+            text: "Submit a message that we will show you the next time you start your PC. You can also select a series of messages from online or continue your current series of messages"
+
+
+        TextInput:
+            id: textInput
+            size_hint: 0.9, 0.5
+            pos_hint: {'x': 0.05, 'y': 0.20}
+            cursor_color: 1, 0.5, 0.75, 1
+            focus: True
+
+        Button:
+            text: "Submit"
+            font_size: '18sp'
+            size_hint:  0.15, 0.07
+            pos_hint: {'x': 0.1, 'y': 0.07}
+            color: 1, 0.5, 0.75, 1
+            background_normal: ''
+            background_color: 1, 1, 1, 1
+            on_press: root.btn_sub_action()
+
+
+        Button:
+            text: "Select"
+            font_size: '18sp'
+            size_hint:  0.15, 0.07
+            pos_hint: {'x': 0.425, 'y': 0.07}
+            color: 1, 0.5, 0.7, 1
+            background_normal: ''
+            background_color: 1, 1, 1, 1
+            on_release: root.manager.current = 'Select'
+
+        Button:
+            text: "Continue"
+            font_size: '18sp'
+            size_hint:  0.15, 0.07
+            pos_hint: {'x': 0.75, 'y': 0.07}
+            color: 1, 0.5, 0.7, 1
+            background_normal: ''
+            background_color: 1, 1, 1, 1
+            on_release: root.btn_cont_action()
+
+<ScreenSelect>:
+
+
+<ButterflyUI>:
+    id: screen_manager
+
+    screen_welcome: screen_welcome
+    screen_start: screen_start
+    screen_select: screen_select
+
+    ScreenWelcome:
+        id: screen_welcome
+        name: 'Welcome'
+        manager: screen_manager
+
+
+    ScreenStart:
+        id: screen_start
+        name: 'Start'
+        manager: screen_manager
+
+    ScreenSelect:
+        id: screen_select
+        name: 'Select'
+        manager: screen_manager
+
+
+
+
